@@ -1,0 +1,340 @@
+---
+title: "Fertility and Reproductive timing among Women in Nigeria"
+subtitle: "Findings from the 2018 Demographic and Health Survey"
+author: "GRAPH Courses team"
+date: "Dec 24, 2022"
+output: prettydoc::html_pretty
+---
+
+```{r echo = F}
+knitr::opts_chunk$set(echo = F, warning = F, message = F)
+```
+
+```{r}
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+## Packages ----
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+if(!require(pacman)) install.packages("pacman")
+pacman::p_load(
+  janitor, # data analysis utilities
+  here, # force rmds to use the project folder as working directory
+  haven, # for reading in stata files
+  scales, # for the comma() function, among others
+  ggstatsplot,
+  patchwork,
+  tidyverse # for everything!
+)
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ggplot2 palette  ----
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# https://mycolor.space/?hex=%2354B1BF&sub=1
+my_palette <- c("#98d8e3","#74cddb","#54B1BF","#288D9B","#006B78","#004A57")
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Import and process data  ----
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ir_raw <- haven::read_dta(here("data/NGIR7BFL.DTA"),
+                          col_select = c(v012, v022, v013, v201, v213, v024, v190, 
+                                         v531, v511, v212, v149, v006, v007, v009, v010, v025)
+                          )
+
+
+
+
+ir <- 
+  ir_raw %>% 
+  select(age = v012, 
+         state = v022,
+         age_group = v013, 
+         num_kids = v201, 
+         curr_pregnant = v213,
+         region = v024, 
+         wealth_index = v190, 
+         age_first_sex = v531, 
+         age_first_cohabitation = v511, 
+         age_first_birth = v212, 
+         educ = v149, 
+         mth_interview = v006, 
+         yr_interview = v007, 
+         mth_birth = v009, 
+         yr_birth = v010, 
+         urban_rural = v025) %>% 
+  haven::as_factor() %>% 
+  mutate(
+    educ = as.character(educ),
+    educ = case_when(
+      educ %in% c("incomplete primary", "complete primary") ~ "Primary",
+      educ %in% c("incomplete secondary", "complete secondary") ~ "Secondary",
+      educ == "no education" ~ "None",
+      educ == "higher" ~ "Higher",
+      TRUE ~ educ),
+    educ = factor(educ, 
+                  levels = c("None", "Primary", "Secondary", "Higher"))) %>% 
+  mutate(wealth_index = str_to_title(wealth_index), 
+         wealth_index = factor(wealth_index, 
+                               levels = c("Poorest", "Poorer", "Middle", "Richer", "Richest"))) %>% 
+  mutate(state = str_remove(state, " rural| urban"), 
+         state = str_sub(state, start = 4), 
+         state = str_to_title(state))
+
+
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+## Fertility ----
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+num_women_in_survey <- nrow(ir)
+num_with_child <- ir %>% filter(num_kids > 0) %>% nrow()
+pct_with_child <- (100 * num_with_child/num_women_in_survey) %>% round(digits = 1)
+mean_sd_kids <- 
+  ir %>% summarise(mean_kids = round(mean(num_kids), digits = 2), 
+                   sd_kids = round(sd(num_kids), digits = 2))
+
+gg_col_children_born <- 
+  ir %>% 
+  count(num_kids) %>% 
+  mutate(pct = 100 * n/sum(n),
+         pct = round(pct, digits = 0), 
+         pct = as.character(pct),
+         pct = if_else(pct <1, "<1", pct),
+         pct = paste0(pct, "%")) %>% 
+  ggplot(aes(x = num_kids, y = n)) + 
+  geom_col(fill = "#006B78")  +
+  geom_text(aes(y = n + 400, 
+                label = pct),
+            size = 3.3, 
+            fontface = "bold"
+            #,
+            #angle = 90
+            )  +
+  labs(x = "Children ever born", y = "Frequency count") +  
+  scale_y_continuous(expand = c(0, 0), 
+                     limits = c(0, 13500)) +
+  scale_x_continuous(breaks = 0:17)+
+  theme_classic()
+
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+## Age at first sex, marriage and birth ----
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+### Subset to individuals aged 15 up ----
+# This is done in the 
+
+ir_25_up <- 
+  ir %>% 
+  filter(age >= 25) %>% 
+    mutate(age_first_sex = as.numeric(as.character(age_first_sex))) %>% 
+    mutate(age_first_cohabitation = as.numeric(as.character(age_first_cohabitation))) %>% 
+    mutate(age_first_birth = as.numeric(as.character(age_first_birth))) 
+
+count_women_25_up <- ir_25_up %>% nrow() 
+
+### Coitarche----
+count_women_25_up_had_sex <- ir_25_up %>% filter(age_first_sex %in% 7:49) %>% nrow() 
+pct_women_25_up_had_sex <- (100 * count_women_25_up_had_sex/count_women_25_up) %>% round(1)
+median_first_sex <-
+  ir_25_up %>% 
+  summarise(med_age_first_sex = median(age_first_sex, na.rm = T)) %>% 
+  pull(1)
+
+### cohabiting----
+count_women_25_up_have_cohabited <- ir_25_up %>% filter(!is.na(age_first_cohabitation)) %>% nrow() 
+pct_women_25_up_have_cohabited <- (100 * count_women_25_up_have_cohabited/count_women_25_up) %>% round(1)
+median_first_cohabitation <-
+  ir_25_up %>% 
+  summarise(med_age_first_cohabitation = median(age_first_cohabitation, na.rm = T)) %>% 
+  pull(1)
+
+### first birth----
+count_women_25_up_have_had_child <- ir_25_up %>% filter(!is.na(age_first_birth)) %>% nrow() 
+pct_women_25_up_have_had_child <- (100 * count_women_25_up_have_had_child/count_women_25_up) %>% round(1)
+median_first_birth <-
+  ir_25_up %>% 
+  summarise(med_age_first_birth = median(age_first_birth,  na.rm = T)) %>% 
+  pull(1)
+
+
+
+### life course events plots per education and urban/rural group----
+
+gg_col_events_per_educ_group <- 
+  ir_25_up %>% 
+  group_by(educ) %>% 
+  summarise(med_age_first_sex = median(age_first_sex, na.rm = T), 
+            med_age_first_cohabitation = median(age_first_cohabitation, na.rm = T), 
+            med_age_first_birth = median(age_first_birth, na.rm = T)) %>% 
+  pivot_longer(2:4) %>% 
+  mutate(name = factor(name,
+                       levels = c("med_age_first_sex", 
+                                  "med_age_first_cohabitation", 
+                                  "med_age_first_birth"))) %>% 
+  ggplot() + 
+  geom_col(aes(x = name, y = value, fill = educ), position = "dodge") + 
+  geom_text(aes(x = name, y = value - 1.2, group = educ, label = value), 
+            size = 3.8, fontface = "bold", color = "white",
+            position = position_dodge(width = 0.9)) +
+  scale_fill_manual(values = rev(my_palette) ) +
+  scale_x_discrete(labels = c("Median age \nat first sex", 
+                              "Median age \nat first cohabitation", 
+                              "Median age \nat first birth")) +
+  scale_y_continuous(expand = c(0, 0), limits = c(0, 27))  +
+  labs(title = "Median ages at key events by education group", 
+       x = "", y = "Age (years)", fill = "Education Level")  +
+  theme_classic()
+
+
+gg_col_events_per_urban_rural_group <- 
+  ir_25_up %>% 
+  group_by(urban_rural) %>% 
+  summarise(med_age_first_sex = median(age_first_sex, na.rm = T), 
+            med_age_first_cohabitation = median(age_first_cohabitation, na.rm = T), 
+            med_age_first_birth = median(age_first_birth, na.rm = T)) %>% 
+  pivot_longer(2:4) %>% 
+  mutate(name = factor(name,
+                       levels = c("med_age_first_sex", 
+                                  "med_age_first_cohabitation", 
+                                  "med_age_first_birth"))) %>% 
+  mutate(urban_rural = fct_rev(urban_rural)) %>% 
+  ggplot() + 
+  geom_col(aes(x = name, y = value, fill = urban_rural), position = "dodge") + 
+  geom_text(aes(x = name, y = value - 1.2, group = urban_rural, label = value), 
+            size = 3.8, fontface = "bold", color = "white",
+            position = position_dodge(width = 0.9)) +
+  scale_fill_manual(values = c(my_palette[5], my_palette[3])) +
+  scale_x_discrete(labels = c("Median age \nat first sex", 
+                              "Median age \nat first cohabitation", 
+                              "Median age \nat first birth")) +
+  scale_y_continuous(expand = c(0, 0), limits = c(0, 27))  +
+  labs(title = "Median ages at key events by residence type", 
+       x = "", y = "Age (years)", fill = "Residence type") +
+  theme_classic()
+
+gg_events <- patchwork::wrap_plots(gg_col_events_per_educ_group, 
+                      gg_col_events_per_urban_rural_group, ncol = 1) + 
+  plot_annotation(tag_levels = 'a')
+
+
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+## Teenage fertility ----
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ir_teen_childbearing <- 
+  ir %>% 
+  filter(age_group == "15-19") %>% 
+  mutate(childbearing = case_when(num_kids > 0 | curr_pregnant == "yes" ~ "Mother or pregnant",
+                                  TRUE ~ "Neither mother nor pregnant"),
+         childbearing = factor(childbearing, levels = c("Mother or pregnant", 
+                                                        "Neither mother nor pregnant")))
+
+
+
+# Note that this does not count towards the four ggplots required
+gg_pie_childbearing  <- 
+  ir_teen_childbearing %>%
+  ggpiestats(
+    x = childbearing,
+    title = "Percent of teenagers (15-19) who have begun childbearing",
+    results.subtitle = F
+    ) +
+  theme_void() +
+  labs(fill = "Childbearing status") + 
+  theme(axis.line.x.bottom = element_blank(), 
+        legend.position = "right") +
+  scale_fill_manual(values = c("#54B1BF", "#004A57")) + 
+  guides(fill = guide_legend(reverse=T))
+
+
+ir_teen_childbearing_by_region <- 
+  ir_teen_childbearing %>% 
+  group_by(region) %>% 
+  count(childbearing) %>% 
+  mutate(pct = 100 * n/sum(n)) %>% 
+  filter(childbearing == "Mother or pregnant")  %>% 
+  ungroup() %>% 
+  mutate(region = str_to_title(region)) %>% 
+  mutate(region = fct_reorder(region, pct)) %>% 
+  arrange(-n)
+
+region_hi_teen_child_rate <- ir_teen_childbearing_by_region %>% head(1)
+region_lo_teen_child_rate <- ir_teen_childbearing_by_region %>% tail(1)
+
+gg_col_ir_teen_childbearing_by_region <- 
+  ir_teen_childbearing_by_region %>% 
+  ggplot(aes(y = region, x = pct, fill = pct)) + 
+  geom_col() + 
+  scale_fill_gradient(low = "#74cddb", high = "#004A57") + 
+  scale_x_continuous(expand = c(0,0)) +
+  labs(title = "Teenage childbearing by region", 
+       fill = "% who have \nbegun \nchildbearing", 
+       x = "Percent", 
+       y = "Region") +
+  theme_classic() + 
+  theme(axis.line.y = element_line(), 
+        legend.position = "right")
+
+gg_teen_childbearing <- 
+  patchwork::wrap_plots(gg_pie_childbearing, 
+                        gg_col_ir_teen_childbearing_by_region, 
+                        ncol = 1) + 
+  plot_annotation(tag_levels = 'a')
+
+
+num_teens <- ir_teen_childbearing %>% nrow()
+num_teens_childbearing <- ir_teen_childbearing %>% filter(childbearing == "Mother or pregnant") %>% nrow()
+pct_teens_childbearing <- (100 * num_teens_childbearing/num_teens) %>% round(digits = 1)
+
+```
+
+# Fertility
+
+Across the `r comma(num_women_in_survey)` surveyed women (ages 15 to 49), `r comma(num_with_child)`, 
+(`r pct_with_child`%) had at least one child. 
+
+```{r fig.height = 4}
+#| fig.cap = "Distribution of the number of children born among surveyed women."
+gg_col_children_born
+```
+
+Figure 1 shows the distribution of the number of children per women. The
+mean number of children ever born was `r mean_sd_kids$mean_kids`, with a standard deviation of `r mean_sd_kids$sd_kids`.
+
+# Age at first sex, marriage and birth
+
+Of `r comma(count_women_25_up)` women aged 25-49 in the survey,
+`r comma(count_women_25_up_had_sex)`, ( `r pct_women_25_up_had_sex`% )
+have had sex, `r comma(count_women_25_up_have_cohabited)`, ( `r pct_women_25_up_had_sex`% )
+have entered a cohabiting relationship (marriage or informal union), and
+`r comma(count_women_25_up_have_had_child)`, ( `r pct_women_25_up_have_had_child`% ) have had at least one child.
+
+The overall median age of first sex was `r median_first_sex` years, 
+while the median first cohabitation was `r median_first_cohabitation` years, 
+and the median for first birth was `r median_first_birth` years.
+
+```{r fig.height = 8}
+#| fig.cap = "Median ages at first sex, cohabitation and birth by education level and residence type. 
+#| Cohabitation refers to people living together, either in a formal marraige or in an informal union"
+gg_events
+```
+
+Figure 2 shows median ages at key life events by education group and residence type. 
+In general, women with more education had first sex, first cohabitation and first birth later than those with less education. 
+Women in urban areas also experienced these events later than those living in rural areas. 
+
+# Teenage Fertility
+
+```{r fig.height = 6}
+#| fig.cap = "Percentage of teenage women ages 15 to 19 who have begun childbearing, overall and by region. 
+#| A womam who has begun childbearing has had a child or is currently pregnant."
+gg_teen_childbearing
+```
+
+Figure 3 shows the percentage of teenage women who have begun childbearing, overall and by region. 
+Out of `r comma(num_teens)` teenage women (15-19) surveyed, 
+`r comma(num_teens_childbearing)` (`r pct_teens_childbearing` %) are mothers or pregnant with their first child. 
+By region, the teenage childbearing rate ranges from `r round(region_hi_teen_child_rate$pct)`% in `r region_hi_teen_child_rate$region` 
+to  `r round(region_lo_teen_child_rate$pct)`% in `r region_lo_teen_child_rate$region`.
+
+
+
