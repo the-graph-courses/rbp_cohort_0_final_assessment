@@ -35,13 +35,13 @@ To submit, you should
 
 The deadline for submission is Jan 31st 2022 at 23:59 UTC+2. Late work will be penalized.
 
-*So, those are the instructions in a nutshell. The rest of this document is a guide to help you excel at this task, but if you feel ready to proceed with just the instructions above, you can charge ahead--no need to read further!*
+Those are the instructions in a nutshell. The rest of this document is a guide to help you excel at this task, but if you feel ready to proceed with just the instructions above, you can charge ahead--no need to read further!
 
 ## Example report
 
-You can see an example report by downloading the zip folder [here](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/the-graph-courses/rbp_cohort_0_materials/tree/main/final_assignment_example){target="_blank"}.
+To help give you a clear sense of what is expected of you, we have created an example report, which you can access by downloading the zip folder [here](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/the-graph-courses/rbp_cohort_0_materials/tree/main/final_assignment_example){target="_blank"}.
 
-This was created using the Nigeria 2018 DHS survey. You can download this data [here](https://drive.google.com/file/d/1c-MIFYKZ0eT9DbSek8rpNgyXAGElW6j4/view?usp=share_link){target="_blank"} if you want to replicate the analysis as a way to practice.
+This report is based on the Nigerian 2018 DHS survey. You can download this data [here](https://drive.google.com/file/d/1c-MIFYKZ0eT9DbSek8rpNgyXAGElW6j4/view?usp=share_link){target="_blank"} if you want to replicate the analysis as a way to practice.
 
 ------------------------------------------------------------------------
 
