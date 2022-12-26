@@ -43,7 +43,7 @@ To help give you a clear sense of what is expected of you, we have created an ex
 
 This example is also embedded on a lesson page of our website.
 
-Note that the dataset used in that example is not included in the zip folder due to size limitations. To replicate that analysis, you should download the source data (the Nigerian 2018 DHS survey) separately. You can find and download this dataset [here](https://drive.google.com/drive/u/0/folders/1J0gw4qpfbB8bYFbXx8QcsQEWgJSVwp_P){target="_blank"} (the same folder that houses the other compiled datasets).
+Note that the dataset used in that example is not included in the zip folder due to size limitations. To replicate the analysis, you should download the source data---the Nigerian 2018 DHS survey---separately. You can find and download this dataset [here](https://drive.google.com/drive/u/0/folders/1J0gw4qpfbB8bYFbXx8QcsQEWgJSVwp_P){target="_blank"}, in the same folder that houses the other compiled datasets.
 
 ------------------------------------------------------------------------
 
