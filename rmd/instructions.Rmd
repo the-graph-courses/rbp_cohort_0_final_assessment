@@ -35,17 +35,7 @@ To submit, you should
 
 The deadline for submission is Jan 31st 2022 at 23:59 UTC+2. Late work will be penalized.
 
-Those are the instructions in a nutshell. The rest of this document is a guide to help you excel at this task.
-
-## Example report
-
-To help give you a clear sense of what is expected of you, we have created an example submission, a report which would earn a high grade on this task. You can access that report by downloading the zip folder [here](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/the-graph-courses/rbp_cohort_0_final_assessment){target="_blank"}, unzipping and clicking into the "rmd" folder.
-
-This example is also embedded on a lesson page of our website.
-
-Note that the dataset used in that example is not included in the zip folder due to size limitations. To replicate the analysis, you should download the source data---the Nigerian 2018 DHS survey---separately. You can find and download this dataset [here](https://drive.google.com/drive/u/0/folders/1J0gw4qpfbB8bYFbXx8QcsQEWgJSVwp_P){target="_blank"}, in the same folder that houses the other compiled datasets.
-
-------------------------------------------------------------------------
+Those are the instructions in a nutshell. The rest of this document is a guide to help you excel at this task, wherein we outline the recommended steps for working on the assessment. You do not have to follow the steps in sequence (in fact, you should probably do step 7, checking the)
 
 ::: side-note
 **Systematic vs just-in-time learning**
@@ -55,11 +45,50 @@ As you work on this assessment, you will encounter many functions and concepts y
 Just-in-time learning will require you to be proactive in seeking out resources and asking for help when needed. It may be challenging at times, but it is a valuable skill to have as a programmer and will serve you well in your future career.
 :::
 
-------------------------------------------------------------------------
+# **Step 1: Look through an example report**
 
-Now let's see what are the recommended sequences of steps for working on the assessment.
+To help give you a clear sense of what is expected of you, we have created an example submission, a report which would earn a high grade on this task. You can access that report by downloading the project folder linked on the assignment page of the website, unzipping and clicking into the "rmd" subfolder.
 
-# **Step 1: Understand the DHS**
+Note that the dataset used in that example is not included in the zip folder due to size limitations. To replicate the analysis, you should download the source data---the Nigerian 2018 DHS survey---separately. You can find and download this dataset [here](https://drive.google.com/drive/u/0/folders/1J0gw4qpfbB8bYFbXx8QcsQEWgJSVwp_P){target="_blank"}, in the same folder that houses the other compiled datasets.
+
+
+# **Step 2: Read the rubric**
+
+As you work on your analysis, you should keep in mind the following rubric against which your work will be graded. Your report will be assessed along the following five dimensions:
+
+1.  Data wrangling (30% of grade)
+
+2.  Quality of figures (30%)
+
+3.  Communication of insights (15%)
+
+4.  Use of Rmarkdown (15%)
+
+5.  Syntax and code formatting (10%)
+
+Each component is outlined in more detail below.
+
+## **Data wrangling**
+
+To get full credit in this category, you will need to demonstrate that you have used appropriate data wrangling techniques to prepare the data for analysis. This includes cleaning and organizing the data, selecting relevant variables, and grouping and summarizing the data as needed. To score maximum points here, it would be wise to pick and present statistics that are not too \*easy\* to calculate. At least a few of the numbers you present should have required substantial data wrangling steps with dplyr verbs.
+
+## **Quality of figures**
+
+To get full credit in this category, you will need to create at least four ggplot-based figures that are clear, informative, and aesthetically pleasing. You should also make sure to include appropriate titles and labels for your figures.
+
+## **Communication of insights**
+
+To get full credit in this category, you will need to clearly and concisely communicate your findings and insights from the data analysis. This includes writing clear, concise, and well-organized text, as well as effectively using the figures you have created to support your insights.
+
+## **Use of Rmarkdown**
+
+To get full credit in this category, you will need to demonstrate that you have effectively used Rmarkdown to create a professional-looking document. This includes using appropriate formatting, including headings and lists, and using Rmarkdown features such as inline code.
+
+## **Syntax and code formatting**
+
+To get full credit in this category, you will need to demonstrate that you have used clean, well-organized code that is easy to read and understand. This includes using appropriate indentation, commenting your code, and using clear, descriptive variable names.
+
+# **Step 3: Understand the DHS**
 
 Before beginning your analysis, it is important to understand the Demographic and Health Surveys (DHS) and the data that you will be using.
 
@@ -83,7 +112,7 @@ To hear more about the different recodes, you can watch the following optional v
 embed_url("https://www.youtube.com/watch?v=BmiSDPebmgc")
 ```
 
-# **Step 2: Choose a report topic**
+# **Step 4: Choose a report topic**
 
 Now that you have a general understanding of the DHS surveys and the data that is collected, it's time to choose a topic for your report. This will determine the focus of your analysis and the specific statistics you will be presenting.
 
@@ -103,7 +132,7 @@ Each of the main headings and subheadings of these reports could be a theme for 
 
 Importantly, we recommend you choose a topic and set of statistics in which *women* are the unit of analysis, not their children, and not men. For example, the topic of anaemia covered on page 13 of the Nigeria 2018 Key Findings [report](https://drive.google.com/file/d/10pp9O9EJZvideynYyANqJtBCsN_vNQjs/view){target="_blank"} uses children as the unit of analysis (reporting, for example, that 68% of children age 6-59 months are anemic). This is not something you will be able to calculate with the women's recode file; it should therefore be avoided.
 
-# **Step 3: Obtain the women's recode file for a specific country**
+# **Step 5: Obtain the women's recode file for a specific country**
 
 To conduct your analysis, you will need access to the individual (women's) recode files for a specific country's DHS survey. All DHS data can be obtained directly from the DHS website by [registering](https://dhsprogram.com/data/new-user-registration.cfm){target="_blank"} for an account and filing a data request. These are usually approved in a few hours.
 
@@ -131,7 +160,7 @@ embed_url("https://www.youtube.com/watch?v=puCCqGU71uM")
 ```
 :::
 
-# **Step 4: Import your dataset into R**
+# **Step 6: Import your dataset into R**
 
 To import the DHS dataset from the .DTA format into R, you should use the `read_dta()` function from the {haven} package.
 
@@ -172,7 +201,7 @@ ir_converted <-
   haven::as_factor() # pass the whole data frame to as_factor()
 ```
 
-# **Step 5: Identify and analyze the relevant variables**
+# **Step 7: Identify and analyze the relevant variables**
 
 You now have downloaded and imported the data you need, and you have an analysis topic in mind, your next step is to figure out which of the DHS variables is relevant for the analyses you are conducting. This is not a simple task, since the DHS variable names are not very descriptive (with variable names are v000 and v001), and there are several *thousand* available variables to sort through.
 
@@ -198,43 +227,8 @@ To find variables relevant to your chosen topic, you can use two key resources.
 
 Using the above two methods, it should be possible to identify the key variables required to calculate the relevant statistics for your chosen topic.
 
-# **Step 6: Read the rubric**
 
-As you work on your analysis, you should keep in mind the rubric against which your work will be graded. Your report will be assessed along the following five dimensions:
-
-1.  Data wrangling (30% of grade)
-
-2.  Quality of figures (30%)
-
-3.  Communication of insights (15%)
-
-4.  Use of Rmarkdown (15%)
-
-5.  Syntax and code formatting (10%)
-
-Each component is outlined in more detail below.
-
-## **Data wrangling**
-
-To get full credit in this category, you will need to demonstrate that you have used appropriate data wrangling techniques to prepare the data for analysis. This includes cleaning and organizing the data, selecting relevant variables, and grouping and summarizing the data as needed. To score maximum points here, it would be wise to pick and present statistics that are not too \*easy\* to calculate. At least a few of the numbers you present should have required substantial data wrangling steps with dplyr verbs.
-
-## **Quality of figures**
-
-To get full credit in this category, you will need to create at least four ggplot-based figures that are clear, informative, and aesthetically pleasing. You should also make sure to include appropriate titles and labels for your figures.
-
-## **Communication of insights**
-
-To get full credit in this category, you will need to clearly and concisely communicate your findings and insights from the data analysis. This includes writing clear, concise, and well-organized text, as well as effectively using the figures you have created to support your insights.
-
-## **Use of Rmarkdown**
-
-To get full credit in this category, you will need to demonstrate that you have effectively used Rmarkdown to create a professional-looking document. This includes using appropriate formatting, including headings and lists, and using Rmarkdown features such as inline code.
-
-## **Syntax and code formatting**
-
-To get full credit in this category, you will need to demonstrate that you have used clean, well-organized code that is easy to read and understand. This includes using appropriate indentation, commenting your code, and using clear, descriptive variable names.
-
-# **Step 7: Submit your work**
+# **Step 8: Export and submit your work**
 
 As mentioned above, to submit your work you should:
 
