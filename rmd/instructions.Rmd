@@ -39,9 +39,11 @@ Those are the instructions in a nutshell. The rest of this document is a guide t
 
 ## Example report
 
-To help give you a clear sense of what is expected of you, we have created an example submission, a report which would earn a high grade on this task. You can access that report by downloading the zip folder [here](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/the-graph-courses/rbp_cohort_0_materials/tree/main/final_assignment_example){target="_blank"}.
+To help give you a clear sense of what is expected of you, we have created an example submission, a report which would earn a high grade on this task. You can access that report by downloading the zip folder [here](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/the-graph-courses/rbp_cohort_0_final_assessment){target="_blank"}, unzipping and clicking into the "rmd" folder.
 
-Before working on your own assignment, you may choose to try to replicate this report. In this case you will need to download its source data, which is the Nigerian 2018 DHS survey. You can find and download this dataset [here](https://drive.google.com/drive/u/0/folders/1J0gw4qpfbB8bYFbXx8QcsQEWgJSVwp_P){target="_blank"} (the same folder that houses the other compiled datasets).
+This example is also embedded on a lesson page of our website.
+
+Note that the dataset used in that example is not included in the zip folder due to size limitations. To replicate that analysis, you should download the source data (the Nigerian 2018 DHS survey) separately. You can find and download this dataset [here](https://drive.google.com/drive/u/0/folders/1J0gw4qpfbB8bYFbXx8QcsQEWgJSVwp_P){target="_blank"} (the same folder that houses the other compiled datasets).
 
 ------------------------------------------------------------------------
 
