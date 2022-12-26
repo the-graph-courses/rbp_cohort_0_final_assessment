@@ -276,6 +276,6 @@ Yes, but you will first need to obtain permission from one of our instructors.
 
 Yes; other options include plotly, highcharter. Get permission from an instructor before proceeding with this though.
 
-**Can I create a dashboard instead of a flat HTML/PDF document?**
+**Can I create a dashboard using flexdashboard instead of a flat HTML/PDF document?**
 
-Yes. In principle, any Rmarkdown-based format is acceptable!
+Yes. Any Rmarkdown-based format is acceptable!
