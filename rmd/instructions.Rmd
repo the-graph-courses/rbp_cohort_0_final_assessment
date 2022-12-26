@@ -47,7 +47,11 @@ Just-in-time learning will require you to be proactive in seeking out resources 
 
 # **Step 1: Look through an example report**
 
-To help give you a clear sense of what is expected of you, we have created an example submission, a report which would earn a high grade on this task. You can access that report by downloading the project folder linked on the assignment page of the website, unzipping and clicking into the "rmd" subfolder.
+To help give you a clear sense of what is expected of you, we have created an example submission, a report which would earn a high grade on this task. You can access that report by downloading the project folder linked on the assignment page of the website, unzipping and clicking into the "rmd" subfolder. The "ng_example" document is the file you seek.
+
+You can also view the sample report by clicking directly on the link below. 
+
+[**LINK TO SAMPLE REPORT**](https://the-graph-courses.github.io/rbp_cohort_0_final_assessment/rmd/ng_example.html)
 
 Note that the dataset used in that example is not included in the zip folder due to size limitations. To replicate the analysis, you should download the source data---the Nigerian 2018 DHS survey---separately. You can find and download this dataset [here](https://drive.google.com/drive/u/0/folders/1J0gw4qpfbB8bYFbXx8QcsQEWgJSVwp_P){target="_blank"}, in the same folder that houses the other compiled datasets.
 
