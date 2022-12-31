@@ -1,5 +1,5 @@
 ---
-title: "RBP Final assignment instructions"
+title: "RBP final project instructions"
 output:
   html_document:
     number_sections: false
@@ -17,7 +17,7 @@ pacman::p_load(tidyverse, vembedr)
 
 # **Summary**
 
-For the final assessment, you will use Demographic and Health Survey (DHS) data to create a short Rmarkdown-based report, focusing on a specific country and a topic of your choosing.
+For the final project, you will use Demographic and Health Survey (DHS) data to create a short Rmarkdown-based report, focusing on a specific country and a topic of your choosing.
 
 The report should:
 
@@ -35,12 +35,12 @@ To submit, you should
 
 The deadline for submission is Jan 31st 2022 at 23:59 UTC+2. Late work will be penalized.
 
-Those are the instructions in a nutshell. The rest of this document is a guide to help you excel at this task, wherein we outline the recommended steps for working on the assessment. You do not have to follow the steps in sequence (in fact, you should probably do step 7, checking the)
+Those are the instructions in a nutshell. The rest of this document is a guide to help you excel at this task, wherein we outline the recommended steps for working on the project. You do not have to follow the steps in sequence (in fact, you should probably do step 7, checking the)
 
 ::: side-note
 **Systematic vs just-in-time learning**
 
-As you work on this assessment, you will encounter many functions and concepts you have not previously learned. You'll therefore be required to pick these up "on the go" as you move through the analysis. This type of just-in-time learning, where you acquire knowledge exactly at the point when you need it, is quite different from the systematic, front-loaded learning approach that we have used throughout the course thus far, where all relevant information was presented before it was applied or tested.
+As you work on this project, you will encounter many functions and concepts you have not previously learned. You'll therefore be required to pick these up "on the go" as you move through the analysis. This type of just-in-time learning, where you acquire knowledge exactly at the point when you need it, is quite different from the systematic, front-loaded learning approach that we have used throughout the course thus far, where all relevant information was presented before it was applied or tested.
 
 Just-in-time learning will require you to be proactive in seeking out resources and asking for help when needed. It may be challenging at times, but it is a valuable skill to have as a programmer and will serve you well in your future career.
 :::
@@ -53,11 +53,11 @@ You can view the sample report by clicking on the link below.
 
 [**VIEW SAMPLE REPORT IN NEW TAB**](https://the-graph-courses.github.io/rbp_cohort_0_final_assessment/rmd/ng_example.html){target="_blank"}
 
-To access the source code for this report, click the link below to download the final assessment folder. Unzip the download, and click into the "rmd" subfolder. The "ng_example" document there is the file you seek.
+To access the source code for this report, click the link below to download the final project folder. Unzip the download, and click into the "rmd" subfolder. The "ng_example" document there is the file you seek.
 
-[**DOWNLOAD FINAL ASSESSMENT FOLDER**](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/the-graph-courses/rbp_cohort_0_final_assessment){target="_blank"}
+[**DOWNLOAD FINAL PROJECT FOLDER**](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/the-graph-courses/rbp_cohort_0_final_assessment){target="_blank"}
 
-Note that the dataset used in that example is not included in the main assessment folder due to size limitations. This means that if you want to run the "ng_example" Rmd yourself, you will need to download the source data separately. You can find and download this dataset---the Nigerian 2018 DHS survey---[here](https://drive.google.com/drive/u/0/folders/1J0gw4qpfbB8bYFbXx8QcsQEWgJSVwp_P){target="_blank"}, in the same folder that houses the other compiled datasets.
+Note that the dataset used in that example is not included in the main project folder due to size limitations. This means that if you want to run the "ng_example" Rmd yourself, you will need to download the source data separately. You can find and download this dataset---the Nigerian 2018 DHS survey---[here](https://drive.google.com/drive/u/0/folders/1J0gw4qpfbB8bYFbXx8QcsQEWgJSVwp_P){target="_blank"}, in the same folder that houses the other compiled datasets.
 
 # **Step 2: Read the rubric**
 
@@ -253,7 +253,7 @@ Due to the sampling design of the DHS, respondent data is actually supposed to b
 
 **This sounds like a lot of work. Why should I try to do a good job at this?**
 
-First, your score on the final assessment will compose 40% of your final grade. Doing a very poor job here may jeopardize your ability to earn a certificate for the course (the pass mark for the course is 70%).
+First, your score on the final project will compose 40% of your final grade. Doing a very poor job here may jeopardize your ability to earn a certificate for the course (the pass mark for the course is 70%).
 
 Secondly, this is a valuable opportunity to reinforce your knowledge, and bring together many of the things you have learned over the course. This is a great way to solidify much of your learning/
 
