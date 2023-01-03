@@ -1955,7 +1955,12 @@ selecting relevant variables, and grouping and summarizing the data as
 needed. To score maximum points here, it would be wise to pick and
 present statistics that are not too *easy* to calculate. At least a few
 of the numbers you present should have required substantial data
-wrangling steps with dplyr verbs.</p>
+wrangling steps with dplyr verbs. In particular, we recommend that,
+somewhere in your Rmd, you should use at least four of the eight dplyr
+functions covered in the data wrangling chapter (<code>select()</code>,
+<code>filter()</code>, <code>mutate()</code>, <code>case_when()</code>,
+<code>group_by()</code>, <code>summarize()</code>,
+<code>pivot_wider()</code> and <code>pivot_longer()</code>)</p>
 </div>
 <div id="quality-of-figures" class="section level2">
 <h2><strong>Quality of figures</strong></h2>
@@ -2202,10 +2207,11 @@ the official DHS publications. What is going on?</strong></p>
 <p>Due to the sampling design of the DHS, respondent data is actually
 supposed to be weighted when conducting analyses. But we have not yet
 taught you how to do this, and do not expect you to take into account
-the respondent weights. So your numbers will differ slightly from the
-official numbers. This is okay! (For those of you who would like to
-understand how to conduct weighted analyses, we will record and share a
-video of this soon.)</p>
+the respondent weights. So your calculated statistics will differ
+slightly from the official numbers you’ll see in DHS reports. This is
+okay! (For those of you interested, you can find a small example of
+weighted survey analysis in the “scripts” sub-folder of the final
+assessment project folder.)</p>
 <p><strong>This sounds like a lot of work. Why should I try to do a good
 job at this?</strong></p>
 <p>First, your score on the final project will compose 40% of your final

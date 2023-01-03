@@ -47,9 +47,9 @@ Just-in-time learning will require you to be proactive in seeking out resources 
 
 # **Step 1: Look through an example report**
 
-To help give you a clear sense of what is expected of you, we have created an example submission, a report which would earn a high grade on this task. 
+To help give you a clear sense of what is expected of you, we have created an example submission, a report which would earn a high grade on this task.
 
-You can view the sample report by clicking on the link below. 
+You can view the sample report by clicking on the link below.
 
 [**VIEW SAMPLE REPORT IN NEW TAB**](https://the-graph-courses.github.io/rbp_cohort_0_final_assessment/rmd/ng_example.html){target="_blank"}
 
@@ -77,7 +77,7 @@ Each component is outlined in more detail below.
 
 ## **Data wrangling**
 
-To get full credit in this category, you will need to demonstrate that you have used appropriate data wrangling techniques to prepare the data for analysis. This includes cleaning and organizing the data, selecting relevant variables, and grouping and summarizing the data as needed. To score maximum points here, it would be wise to pick and present statistics that are not too \*easy\* to calculate. At least a few of the numbers you present should have required substantial data wrangling steps with dplyr verbs.
+To get full credit in this category, you will need to demonstrate that you have used appropriate data wrangling techniques to prepare the data for analysis. This includes cleaning and organizing the data, selecting relevant variables, and grouping and summarizing the data as needed. To score maximum points here, it would be wise to pick and present statistics that are not too \*easy\* to calculate. At least a few of the numbers you present should have required substantial data wrangling steps with dplyr verbs. In particular, we recommend that, somewhere in your Rmd, you should use at least four of the eight dplyr functions covered in the data wrangling chapter (`select()`, `filter()`, `mutate()`, `case_when()`, `group_by()`, `summarize()`, `pivot_wider()` and `pivot_longer()`)
 
 ## **Quality of figures**
 
@@ -234,7 +234,6 @@ To find variables relevant to your chosen topic, you can use two key resources.
 
 Using the above two methods, it should be possible to identify the key variables required to calculate the relevant statistics for your chosen topic.
 
-
 # **Step 8: Export and submit your work**
 
 As mentioned above, to submit your work you should:
@@ -249,7 +248,7 @@ As mentioned above, to submit your work you should:
 
 **My percentages and numbers differ slightly with those seen in the official DHS publications. What is going on?**
 
-Due to the sampling design of the DHS, respondent data is actually supposed to be weighted when conducting analyses. But we have not yet taught you how to do this, and do not expect you to take into account the respondent weights. So your numbers will differ slightly from the official numbers. This is okay! (For those of you who would like to understand how to conduct weighted analyses, we will record and share a video of this soon.)
+Due to the sampling design of the DHS, respondent data is actually supposed to be weighted when conducting analyses. But we have not yet taught you how to do this, and do not expect you to take into account the respondent weights. So your calculated statistics will differ slightly from the official numbers you'll see in DHS reports. This is okay! (For those of you interested, you can find a small example of weighted survey analysis in the "scripts" sub-folder of the final assessment project folder.)
 
 **This sounds like a lot of work. Why should I try to do a good job at this?**
 
